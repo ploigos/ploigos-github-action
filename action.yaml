@@ -2,15 +2,20 @@
 name: 'PSR Action'
 description: 'Run psr commands'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+  verbose:
+    description: 'Log any *sh commands used during execution.'
+    required: false
+    default: "false"
+  stepName:
+    description: ''
+    required: false
+    default: "generate-metadata"
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  result: # id of output
+    description: 'The output from the psr command'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.verbose }}
+    - ${{ inputs.stepName }}
